@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лаукерт Вячеслав | Преподаватель английского онлайн</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 50%, #c3cfe2 100%); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 20px; 
+            color: #1d1d1f;
+            line-height: 1.6;
+        }
+        .glass { 
+            background: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(25px) saturate(180%); 
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-radius: 28px; 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.05); 
+            padding: 48px 40px; 
+            margin: 24px 0; 
+            max-width: 650px; 
+            width: 100%; 
+            text-align: center; 
+            position: relative;
+            overflow: hidden;
+        }
+        .glass::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shine 3s infinite;
+            z-index: 0;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        .glass > * { position: relative; z-index: 1; }
+        
+        h1 { font-size: 2.8em; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.02em; }
+        h2 { font-size: 1.8em; font-weight: 600; margin-bottom: 24px; }
+        p { font-size: 1.2em; margin-bottom: 32px; opacity: 0.9; }
+        
+        img.portrait { 
+            width: 160px; height: 160px; 
+            border-radius: 50%; 
+            margin: 0 auto 24px; 
+            object-fit: cover; 
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .certificate-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            margin: 20px 0;
+        }
+        
+        /* БАЗОВЫЕ СТИЛИ ДЛЯ ВСЕХ КНОПОК */
+        .btn { 
+            color: white; 
+            border: none; 
+            padding: 18px 36px; 
+            border-radius: 20px; 
+            font-size: 1.1em; 
+            font-weight: 500; 
+            font-family: inherit;
+            cursor: pointer; 
+            margin: 12px; 
+            text-decoration: none; 
+            display: inline-block; 
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* СИНЯЯ кнопка (Telegram, Тест, Результат) */
+        .btn-primary {
+            background: rgba(0, 122, 255, 0.9);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3);
+        }
+        .btn-primary:hover { 
+            background: rgba(0, 122, 255, 1); 
+            transform: translateY(-3px) scale(1.02); 
+            box-shadow: 0 15px 35px rgba(0, 122, 255, 0.4);
+        }
+        
+        /* ЗЕЛЕНАЯ кнопка ПОЗВОНИТЬ */
+        .btn-call {
+            background: rgba(0, 200, 83, 0.9);
+            box-shadow: 0 8px 25px rgba(0, 200, 83, 0.3);
+        }
+        .btn-call:hover {
+            background: rgba(0, 200, 83, 1);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 200, 83, 0.4);
+        }
+        
+        /* Zoom - фирменный зеленый */
+        .btn-zoom {
+            background: rgba(34, 197, 94, 0.9);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+        }
+        .btn-zoom:hover {
+            background: rgba(34, 197, 94, 1);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(34, 197, 94, 0.4);
+        }
+        
+        /* Контур Talk - светло-синий */
+        .btn-kontur {
+            background: rgba(100, 150, 255, 0.8);
+            box-shadow: 0 8px 25px rgba(100, 150, 255, 0.25);
+        }
+        .btn-kontur:hover {
+            background: rgba(100, 150, 255, 0.95);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(100, 150, 255, 0.35);
+        }
+        
+        /* НОВАЯ КНОПКА ПРЕКРАТИТЬ - КРАСНО-СИНИЙ ГРАДИЕНТ */
+        .btn-stop {
+            background: linear-gradient(135deg, rgba(220, 53, 69, 0.9), rgba(0, 122, 255, 0.9));
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+            margin-top: 20px;
+        }
+        .btn-stop:hover {
+            background: linear-gradient(135deg, rgba(220, 53, 69, 1), rgba(0, 122, 255, 1));
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(100, 25, 25, 0.4);
+        }
+        
+        .welcome-section.test-started { display: none !important; }
+        .test-elements.test-started { display: block !important; }
+        
+        /* СКРЫВАЕМ СЕРТИФИКАТ ПРИ ТЕСТЕ */
+        .test-active .certificate-section {
+            display: none !important;
+        }
+        
+        .question { 
+            font-size: 1.4em; 
+            font-weight: 500; 
+            margin: 32px 0; 
+            line-height: 1.5;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .options { margin: 32px 0; }
+        .options label { 
+            display: block !important; 
+            margin: 16px 0; 
+            padding: 20px 24px; 
+            background: rgba(255, 255, 255, 0.4); 
+            backdrop-filter: blur(15px);
+            border-radius: 18px; 
+            cursor: pointer; 
+            transition: all 0.25s; 
+            font-size: 1.15em;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        .options label:hover { 
+            background: rgba(255, 255, 255, 0.6); 
+            transform: translateX(8px); 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        .options input[type="radio"] { 
+            margin-right: 16px; 
+            transform: scale(1.3); 
+            accent-color: #007AFF;
+        }
+        
+        .progress { 
+            background: rgba(0, 0, 0, 0.08); 
+            height: 10px; 
+            border-radius: 6px; 
+            margin: 32px 0; 
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .progress-bar { 
+            background: linear-gradient(90deg, #007AFF, #00C6FF); 
+            height: 100%; 
+            width: 0%; 
+            transition: width 0.5s ease; 
+            border-radius: 6px;
+            box-shadow: 0 0 20px rgba(0, 122, 255, 0.5);
+        }
+        
+        #result { display: none; animation: fadeIn 0.8s ease; }
+        #result h2 { 
+            font-size: 2.2em; 
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #007AFF, #00C6FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        @media (max-width: 768px) { 
+            body { padding: 16px; }
+            .glass { padding: 32px 24px; margin: 16px 0; }
+            h1 { font-size: 2.2em; }
+            .question { font-size: 1.25em; }
+            .options label { margin: 12px 0; padding: 16px 20px; font-size: 1.1em; }
+            .certificate-img { border-radius: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Главный блок -->
+    <section class="glass" id="main-glass">
+        <div class="welcome-section" id="welcome">
+            <img src="photo.jpg" alt="Лаукерт Вячеслав" class="portrait" onerror="this.src='https://via.placeholder.com/160?text=📸'">
+            <h1>Лаукерт Вячеслав</h1>
+            <p>Преподаватель английского языка онлайн<br><strong>10+ лет опыта индивидуальных уроков</strong></p>
+            <a href="https://t.me/LaukertV" class="btn btn-primary" target="_blank">💬 Telegram</a>
+            <a href="tel:+79081013949" class="btn btn-call">📞 Позвонить</a>
+            <button class="btn btn-primary" onclick="startTest()">🎯 Пройти тест уровня английского (24 вопроса)</button>
+        </div>
+
+        <div class="test-elements" id="test-elements" style="display: none;">
+            <div class="progress">
+                <div class="progress-bar" id="progress"></div>
+            </div>
+            <div id="question" class="question"></div>
+            <div id="options" class="options"></div>
+            <!-- КНОПКА С КРАСНО-СИНИМ ГРАДИЕНТОМ -->
+            <a href="https://t.me/LaukertV" class="btn btn-stop" id="stopTestBtn" target="_blank" style="display: none;">
+                ⏹️ Прекратить и записаться на онлайн уроки
+            </a>
+            <div id="result"></div>
+        </div>
+    </section>
+
+    <!-- Блок сертификата - СКРЫВАЕТСЯ при тесте -->
+    <section class="glass certificate-section" id="certificate-section">
+        <h2>🏆 Сертификат преподавателя</h2>
+        <img src="cert1.jpg" alt="Сертификат Лаукерт Вячеслав" class="certificate-img" onerror="this.src='https://via.placeholder.com/500x300/667eea/ffffff?text=📜+Сертификат'">
+        <p>Сертифицированный преподаватель английского языка с международным признанием</p>
+    </section>
+
+    <!-- Блок скачивания программ -->
+    <section class="glass downloads">
+        <h2>📥 Скачайте программы для наших уроков</h2>
+        <a href="https://zoom.us/download" class="btn btn-zoom" target="_blank">📹 Zoom</a>
+        <a href="https://app.ktalk.ru/download/app" class="btn btn-kontur" target="_blank">💻 Контур Talk</a>
+    </section>
+
+    <script>
+        const questions = [
+            { q: "1. He ___ to school every day.", o: ["go", "goes", "going", "gone"], a: 1 },
+            { q: "2. I ___ English since 2015.", o: ["study", "am studying", "have studied", "studied"], a: 2 },
+            { q: "3. If I ___ you, I would ask for help.", o: ["am", "was", "were", "be"], a: 2 },
+            { q: "4. She is looking forward ___ you.", o: ["to see", "to seeing", "see", "seeing"], a: 1 },
+            { q: "5. He ___ his homework when I called.", o: ["did", "was doing", "has done", "does"], a: 1 },
+            { q: "6. This is the ___ book I have ever read.", o: ["more interesting", "most interesting", "interesting", "interestingest"], a: 1 },
+            { q: "7. They ___ in London for 10 years.", o: ["live", "have lived", "lived", "are living"], a: 1 },
+            { q: "8. I wish I ___ more time.", o: ["have", "had", "will have", "would have"], a: 1 },
+            { q: "9. The cat is ___ the table.", o: ["in", "on", "at", "under"], a: 1 },
+            { q: "10. She ___ a car next year.", o: ["buys", "is buying", "will buy", "bought"], a: 2 },
+            { q: "11. He is used to ___ early.", o: ["get up", "getting up", "gets up", "got up"], a: 1 },
+            { q: "12. I ___ to the cinema yesterday.", o: ["go", "went", "have gone", "was going"], a: 1 },
+            { q: "13. She is the girl ___ helped me.", o: ["which", "who", "whom", "whose"], a: 1 },
+            { q: "14. I have ___ finished my work.", o: ["yet", "just", "already", "ever"], a: 1 },
+            { q: "15. How ___ money do you have?", o: ["many", "much", "few", "little"], a: 1 },
+            { q: "16. He was made ___ the room.", o: ["clean", "to clean", "cleaning", "cleaned"], a: 1 },
+            { q: "17. I'm not as tall ___ my brother.", o: ["as", "than", "like", "so"], a: 0 },
+            { q: "18. She ___ be at home, I'm not sure.", o: ["might", "must", "can't", "has to"], a: 0 },
+            { q: "19. I'll call you as soon as I ___ there.", o: ["get", "will get", "got", "getting"], a: 0 },
+            { q: "20. This time next week, I ___ on the beach.", o: ["am lying", "will lie", "will be lying", "lie"], a: 2 },
+            { q: "21. If I had known, I ___ you.", o: ["would help", "would have helped", "helped", "help"], a: 1 },
+            { q: "22. She is allergic ___ cats.", o: ["to", "of", "with", "for"], a: 0 },
+            { q: "23. He ___ his leg while playing football.", o: ["breaks", "broke", "has broken", "was breaking"], a: 1 },
+            { q: "24. I ___ a shower when the phone rang.", o: ["took", "was taking", "had taken", "take"], a: 1 }
+        ];
+
+        let current = 0;
+        let score = 0;
+        let testRunning = false;
+
+        function startTest() {
+            testRunning = true;
+            document.body.classList.add('test-active');
+            document.getElementById('welcome').style.display = 'none';
+            document.getElementById('test-elements').style.display = 'block';
+            document.getElementById('stopTestBtn').style.display = 'inline-block';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[current];
+            document.getElementById('question').textContent = q.q;
+            
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = q.o.map((option, index) => 
+                `<label>
+                    <input type="radio" name="q${current}" value="${index}">
+                    ${option}
+                </label>`
+            ).join('');
+            
+            document.querySelectorAll(`input[name="q${current}"]`).forEach(radio => {
+                radio.addEventListener('change', function() {
+                    setTimeout(() => {
+                        nextQuestion();
+                    }, 500);
+                });
+            });
+            
+            const progress = ((current + 1) / questions.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function nextQuestion() {
+            const selected = document.querySelector(`input[name="q${current}"]:checked`);
+            if (selected && parseInt(selected.value) === questions[current].a) {
+                score++;
+            }
+            
+            current++;
+            
+            if (current < questions.length) {
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('question').style.display = 'none';
+            document.getElementById('options').style.display = 'none';
+            document.getElementById('stopTestBtn').style.display = 'none';
+            
+            let level, description;
+            if (score < 8) {
+                level = 'Beginner (A1)';
+                description = 'Начинающий уровень. Рекомендуем начать с основ грамматики и базовой лексики.';
+            } else if (score < 12) {
+                level = 'Elementary (A2)';
+                description = 'Базовый уровень. Нужно укрепить основы и начать практиковать разговорную речь.';
+            } else if (score < 16) {
+                level = 'Intermediate (B1)';
+                description = 'Средний уровень. Развиваем беглость речи и изучаем более сложные грамматические конструкции.';
+            } else if (score < 20) {
+                level = 'Upper-Intermediate (B2)';
+                description = 'Уверенный уровень. Работаем над нюансами языка, идиомами и профессиональной лексикой.';
+            } else if (score < 23) {
+                level = 'Advanced (C1)';
+                description = 'Продвинутый уровень. Совершенствуем навыки до уровня носителя языка.';
+            } else {
+                level = 'Proficiency (C2)';
+                description = 'Уровень носителя. Поддерживаем и углубляем знания в специализированных областях.';
+            }
+            
+            document.getElementById('result').innerHTML = `
+                <h2>🎉 Ваш результат: ${score}/24</h2>
+                <p><strong>Уровень: ${level}</strong></p>
+                <p>${description}</p>
+                <p>На основе вашего уровня мы подберем индивидуальную программу обучения!</p>
+                <a href="https://t.me/LaukertV" class="btn btn-primary" target="_blank" style="margin-top: 24px;">📅 Записаться на пробный урок</a>
+                <a href="tel:+79081013949" class="btn btn-call" style="margin-top: 24px;">📞 Позвонить для консультации</a>
+            `;
+            document.getElementById('result').style.display = 'block';
+            
+            // Прокрутка к результату
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Добавляем обработчик для кнопки "Прекратить"
+        document.getElementById('stopTestBtn').addEventListener('click', function() {
+            document.body.classList.remove('test-active');
+            document.getElementById('welcome').style.display = 'block';
+            document.getElementById('test-elements').style.display = 'none';
+            document.getElementById('stopTestBtn').style.display = 'none';
+            document.getElementById('certificate-section').style.display = 'block';
+            
+            // Сбрасываем тест
+            current = 0;
+            score = 0;
+            testRunning = false;
+        });
+    </script>
+</body>
+</html>
