@@ -198,7 +198,7 @@
             min-width: 300px;
             background: rgba(255,255,255,0.2);
             border-radius: 20px;
-            padding: 30px;
+            padding: 30px 20px;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.3);
             margin: 15px;
@@ -225,17 +225,22 @@
         }
         
         .price-tag {
-            font-size: 3em;
+            font-size: 2.2em;
             font-weight: 700;
             color: #007AFF;
-            margin: 20px 0;
+            margin: 15px 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 5px;
         }
         
         .price-subtitle {
-            font-size: 1.2em;
+            font-size: 1.1em;
             color: #666;
             margin-bottom: 20px;
+            line-height: 1.4;
         }
         
         .welcome-section.test-started { display: none !important; }
@@ -337,6 +342,7 @@
                 margin-bottom: 20px;
                 transform: none !important;
                 margin: 10px 0;
+                padding: 25px 15px;
             }
             .price-card.featured {
                 transform: none !important;
@@ -349,7 +355,20 @@
                 gap: 0;
             }
             .price-tag {
-                font-size: 2.5em;
+                font-size: 2em;
+                padding: 0 10px;
+            }
+            .price-subtitle {
+                font-size: 1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .price-tag {
+                font-size: 1.8em;
+            }
+            .price-card {
+                padding: 20px 10px;
             }
         }
     </style>
@@ -427,26 +446,26 @@
             
             <div class="price-container">
                 <div class="price-card">
-                    <h4 style="color: #007AFF; margin-bottom: 15px;">👨‍🏫 Индивидуальные занятия</h4>
+                    <h4 style="color: #007AFF; margin-bottom: 15px; font-size: 1.25em;">👨‍🏫 Индивидуальные занятия</h4>
                     <div class="price-tag">от 1 100 ₽/час</div>
                     <p class="price-subtitle">Персональный онлайн урок с репетитором</p>
-                    <div style="text-align: left; margin-top: 20px;">
-                        <p><strong>✓ Индивидуальная программа</strong></p>
-                        <p><strong>✓ Гибкое расписание</strong></p>
-                        <p><strong>✓ Максимум внимания</strong></p>
-                        <p><strong>✓ Быстрый прогресс</strong></p>
+                    <div style="text-align: left; margin-top: 20px; font-size: 0.95em;">
+                        <p style="margin-bottom: 8px;"><strong>✓ Индивидуальная программа</strong></p>
+                        <p style="margin-bottom: 8px;"><strong>✓ Гибкое расписание</strong></p>
+                        <p style="margin-bottom: 8px;"><strong>✓ Максимум внимания</strong></p>
+                        <p style="margin-bottom: 8px;"><strong>✓ Быстрый прогресс</strong></p>
                     </div>
                 </div>
                 
                 <div class="price-card featured">
-                    <h4 style="color: #007AFF; margin-bottom: 15px;">👥 Групповые занятия</h4>
+                    <h4 style="color: #007AFF; margin-bottom: 15px; font-size: 1.25em;">👥 Групповые занятия</h4>
                     <div class="price-tag">от 1 000 ₽/час</div>
                     <p class="price-subtitle">Онлайн уроки в мини-группах (2-6 человек)</p>
-                    <div style="text-align: left; margin-top: 20px;">
-                        <p><strong>✓ Экономия до 30%</strong></p>
-                        <p><strong>✓ Групповое взаимодействие</strong></p>
-                        <p><strong>✓ Регулярное расписание</strong></p>
-                        <p><strong>✓ Мотивация в группе</strong></p>
+                    <div style="text-align: left; margin-top: 20px; font-size: 0.95em;">
+                        <p style="margin-bottom: 8px;"><strong>✓ Экономия до 30%</strong></p>
+                        <p style="margin-bottom: 8px;"><strong>✓ Групповое взаимодействие</strong></p>
+                        <p style="margin-bottom: 8px;"><strong>✓ Регулярное расписание</strong></p>
+                        <p style="margin-bottom: 8px;"><strong>✓ Мотивация в группе</strong></p>
                     </div>
                 </div>
             </div>
