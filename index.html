@@ -623,6 +623,62 @@
             box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
         }
 
+        .download-section {
+            background-color: var(--light-bg);
+        }
+
+        .download-subtitle {
+            font-size: 1.1rem;
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .download-card {
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .download-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .download-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .download-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .download-card .btn {
+            display: inline-block;
+        }
+
         footer {
             background-color: var(--text-dark);
             color: var(--white);
@@ -896,6 +952,27 @@
         <h2>Готовы начать обучение?</h2>
         <p>Запишитесь на пробный урок прямо сейчас и начните свой путь к успеху в английском языке!</p>
         <button class="btn btn-primary" onclick="document.getElementById('contacts').scrollIntoView({behavior: 'smooth'})">Записаться на пробный урок</button>
+    </section>
+
+    <section class="download-section" id="download">
+        <div class="container">
+            <h2>Приложения для обучения</h2>
+            <p class="download-subtitle">Скачайте удобные приложения для видеоконференций</p>
+            <div class="download-grid">
+                <div class="download-card">
+                    <div class="download-icon">📱</div>
+                    <h3>Zoom</h3>
+                    <p>Популярное приложение для видеоконференций и онлайн обучения</p>
+                    <a href="https://zoom.us/download" target="_blank" class="btn btn-primary">Скачать Zoom</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">🎥</div>
+                    <h3>Контур.Talk</h3>
+                    <p>Безопасное русское приложение для видеоконференцсвязи</p>
+                    <a href="https://app.ktalk.ru/download/app" target="_blank" class="btn btn-primary">Скачать Контур.Talk</a>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="contacts-section" id="contacts">
