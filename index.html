@@ -170,6 +170,168 @@
             transform: translateY(-2px);
         }
 
+        .test-section {
+            background-color: var(--white);
+        }
+
+        .test-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .test-modal.active {
+            display: flex;
+        }
+
+        .test-modal-content {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 3rem;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .test-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+        }
+
+        .test-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .test-close:hover {
+            color: var(--text-dark);
+        }
+
+        .test-progress {
+            width: 100%;
+            height: 6px;
+            background-color: var(--border-color);
+            border-radius: 3px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .test-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .test-question {
+            margin-bottom: 2rem;
+        }
+
+        .test-question-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .test-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .test-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .test-option:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .test-option input[type="radio"] {
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+
+        .test-option label {
+            cursor: pointer;
+            flex: 1;
+            text-align: left;
+            color: var(--text-dark);
+        }
+
+        .test-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: space-between;
+        }
+
+        .test-buttons .btn {
+            flex: 1;
+        }
+
+        .test-result {
+            display: none;
+            text-align: center;
+        }
+
+        .test-result.active {
+            display: block;
+        }
+
+        .test-result-score {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 2rem 0;
+        }
+
+        .test-result-level {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .test-result-description {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .test-result-button {
+            margin-top: 2rem;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -734,6 +896,7 @@
                 <li><a href="#pricing">Цены</a></li>
                 <li><a href="#testimonials">Отзывы</a></li>
                 <li><a href="#contacts">Контакты</a></li>
+                <li><a href="#test" class="cta-btn" style="background-color: #ef4444;">Тест уровня</a></li>
                 <li><a href="#contacts" class="cta-btn">Начать</a></li>
             </ul>
         </nav>
@@ -954,6 +1117,43 @@
         <button class="btn btn-primary" onclick="document.getElementById('contacts').scrollIntoView({behavior: 'smooth'})">Записаться на пробный урок</button>
     </section>
 
+    <section class="test-section" id="test">
+        <div class="container">
+            <h2>Определите ваш уровень английского</h2>
+            <p class="download-subtitle">Пройдите быстрый тест из 24 вопросов и узнайте ваш уровень</p>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <button class="btn btn-primary" onclick="startTest()" style="background-color: #ef4444; padding: 1.2rem 3rem; font-size: 1.1rem;">Начать тест</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="test-modal" id="testModal">
+        <div class="test-modal-content">
+            <div class="test-header">
+                <h2>Тест английского языка</h2>
+                <button class="test-close" onclick="closeTest()">✕</button>
+            </div>
+            <div class="test-progress">
+                <div class="test-progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div id="testQuestions"></div>
+            
+            <div class="test-result" id="testResult">
+                <h3>Ваш результат:</h3>
+                <div class="test-result-score" id="resultScore">0%</div>
+                <div class="test-result-level" id="resultLevel">Level</div>
+                <div class="test-result-description" id="resultDescription">Description</div>
+                <button class="btn btn-primary test-result-button" onclick="closeTest()">Закрыть тест</button>
+            </div>
+
+            <div class="test-buttons" id="testButtons">
+                <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn" style="display:none;">← Назад</button>
+                <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn">Далее →</button>
+            </div>
+        </div>
+    </div>
+
     <section class="download-section" id="download">
         <div class="container">
             <h2>Приложения для обучения</h2>
@@ -1065,6 +1265,120 @@
                 }
             });
         });
+
+        // Тест английского языка
+        const testQuestions = [
+            { q: "Как переводится 'Hello'?", opts: ["Пока", "Привет", "Спасибо", "Пожалуйста"], correct: 1 },
+            { q: "Какая форма глагола используется с 'he/she/it'?", opts: ["play", "plays", "played", "playing"], correct: 1 },
+            { q: "Translate: 'I am a student'", opts: ["Я студент", "Я был студентом", "Я буду студентом", "Я имею студента"], correct: 0 },
+            { q: "What is the past tense of 'go'?", opts: ["goes", "going", "went", "gone"], correct: 2 },
+            { q: "Какой артикль используется перед гласным звуком?", opts: ["a", "an", "the", "no article"], correct: 1 },
+            { q: "Complete: 'If I were you, I ____ do it'", opts: ["would", "will", "would have", "have"], correct: 0 },
+            { q: "What is the opposite of 'big'?", opts: ["large", "small", "huge", "great"], correct: 1 },
+            { q: "How many letters in the English alphabet?", opts: ["24", "25", "26", "27"], correct: 2 },
+            { q: "Translate 'книга' на английский", opts: ["pen", "book", "desk", "door"], correct: 1 },
+            { q: "What tense is this? 'She has lived here for 5 years'", opts: ["Present Simple", "Present Perfect", "Past Perfect", "Present Continuous"], correct: 1 },
+            { q: "Choose correct: 'There ___ a lot of people here'", opts: ["is", "are", "be", "been"], correct: 1 },
+            { q: "Translate: 'Я люблю читать книги'", opts: ["I love read books", "I love reading books", "I am love reading books", "I loving read books"], correct: 1 },
+            { q: "What is the plural of 'child'?", opts: ["childs", "childes", "children", "childrens"], correct: 2 },
+            { q: "Complete: 'I wish I ____ speak English fluently'", opts: ["can", "could", "would", "should"], correct: 1 },
+            { q: "Какой предлог используется: 'interested ___ music'?", opts: ["on", "in", "at", "for"], correct: 1 },
+            { q: "What is the synonym of 'happy'?", opts: ["sad", "angry", "cheerful", "tired"], correct: 2 },
+            { q: "Translate: 'Она работает в офисе'", opts: ["She works on office", "She working in office", "She works in office", "She worked in office"], correct: 2 },
+            { q: "What time form: 'I will go tomorrow'?", opts: ["Present", "Past", "Future", "Perfect"], correct: 2 },
+            { q: "Choose correct passive voice: 'The letter was written by...'", opts: ["me", "I", "my", "mine"], correct: 0 },
+            { q: "Translate 'учитель' на английский", opts: ["student", "teacher", "doctor", "engineer"], correct: 1 },
+            { q: "Complete: 'If you study hard, you ____ pass the exam'", opts: ["will", "would", "shall", "should"], correct: 0 },
+            { q: "What is the comparative of 'good'?", opts: ["gooder", "better", "more good", "best"], correct: 1 },
+            { q: "Choose: 'I ____ English since childhood'", opts: ["speak", "am speaking", "have been speaking", "spoke"], correct: 2 },
+            { q: "Translate: 'Вчера я ходил в кино'", opts: ["Yesterday I go to cinema", "Yesterday I went to cinema", "Yesterday I have gone to cinema", "Yesterday I am going to cinema"], correct: 1 }
+        ];
+
+        let currentQuestion = 0;
+        let answers = new Array(testQuestions.length).fill(-1);
+        let testStarted = false;
+
+        function startTest() {
+            testStarted = true;
+            currentQuestion = 0;
+            answers = new Array(testQuestions.length).fill(-1);
+            document.getElementById('testModal').classList.add('active');
+            renderQuestion();
+        }
+
+        function closeTest() {
+            document.getElementById('testModal').classList.remove('active');
+            testStarted = false;
+        }
+
+        function renderQuestion() {
+            const q = testQuestions[currentQuestion];
+            const progress = ((currentQuestion + 1) / testQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            let html = `<div class="test-question"><div class="test-question-title">Вопрос ${currentQuestion + 1} из ${testQuestions.length}: ${q.q}</div><div class="test-options">`;
+            
+            q.opts.forEach((opt, idx) => {
+                const checked = answers[currentQuestion] === idx ? 'checked' : '';
+                html += `<label class="test-option"><input type="radio" name="answer" value="${idx}" ${checked} onchange="answers[${currentQuestion}] = ${idx}"><span>${opt}</span></label>`;
+            });
+            
+            html += '</div></div>';
+            document.getElementById('testQuestions').innerHTML = html;
+
+            document.getElementById('prevBtn').style.display = currentQuestion === 0 ? 'none' : 'block';
+            document.getElementById('nextBtn').textContent = currentQuestion === testQuestions.length - 1 ? 'Завершить тест' : 'Далее →';
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < testQuestions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function showResult() {
+            const correct = answers.reduce((sum, ans, idx) => sum + (ans === testQuestions[idx].correct ? 1 : 0), 0);
+            const percentage = Math.round((correct / testQuestions.length) * 100);
+            
+            let level, description;
+            if (percentage < 25) {
+                level = "A1 - Beginner";
+                description = "Вы только начинаете изучать английский язык. Рекомендуем начать с базовых уроков.";
+            } else if (percentage < 45) {
+                level = "A2 - Elementary";
+                description = "Хороший прогресс! Вы знаете основы английского. Пора расширять словарный запас.";
+            } else if (percentage < 65) {
+                level = "B1 - Intermediate";
+                description = "Отличный результат! Вы владеете средним уровнем английского языка. Развивайте разговорные навыки.";
+            } else if (percentage < 80) {
+                level = "B2 - Upper Intermediate";
+                description = "Хороший уровень! Вы близки к продвинутому уровню. Фокусируйтесь на деталях.";
+            } else if (percentage < 92) {
+                level = "C1 - Advanced";
+                description = "Отличный результат! Вы владеете продвинутым уровнем английского языка.";
+            } else {
+                level = "C2 - Proficiency";
+                description = "Превосходно! Вы владеете английским языком на уровне носителя языка.";
+            }
+
+            document.getElementById('resultScore').textContent = percentage + '%';
+            document.getElementById('resultLevel').textContent = level;
+            document.getElementById('resultDescription').textContent = description;
+            
+            document.getElementById('testQuestions').style.display = 'none';
+            document.getElementById('testButtons').style.display = 'none';
+            document.getElementById('testResult').classList.add('active');
+        }
     </script>
 </body>
 </html>
